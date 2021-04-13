@@ -22,5 +22,20 @@ namespace WindowsFormsApplication72
             b.yol.Close();
             return liste;
         }
+        public bool uyevarmi(string gtc,string gsfr)
+        {
+            int ks;
+            b.yol.Open();
+            SqlCommand komut = new SqlCommand("select Count(*) from TblOgrenciler where O_Tc_Kimlik=@a and O_Sifre=@b",b.yol);
+            komut.Parameters.AddWithValue("@a", gtc);
+            komut.Parameters.AddWithValue("@b", gsfr);
+            ks = Convert.ToInt16(komut.ExecuteScalar());
+            if (ks>0)
+            {
+                return true;
+            }
+            b.yol.Close();
+            return false;
+        }
     }
 }
